@@ -1,11 +1,11 @@
 FROM alpine:3
 
-RUN apk add --no-cache py3-pip
-RUN python3 -m venv ~/pyvenv --system-site-packages
-RUN /root/pyvenv/bin/pip3 install gdown
+RUN apk add --no-cache py3-pip && \
+    python3 -m venv /opt/venv --system-site-packages && \
+    /opt/venv/bin/pip3 install --no-cache-dir gdown
 
-ENV PATH="$PATH:/root/pyvenv/bin/"
+ENV PATH="/opt/venv/bin:$PATH"
 
-WORKDIR  /data
+WORKDIR /data
 
 VOLUME /data
